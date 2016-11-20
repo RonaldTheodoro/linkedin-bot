@@ -11,11 +11,12 @@ browser.get(url)
 
 email = browser.find_element_by_xpath('//*[@id="session_key-login"]')
 password = browser.find_element_by_xpath('//*[@id="session_password-login"]')
-# subimit = browser.find_element_by_xpath('//*[@id="btn-primary"]')
+sign_in = browser.find_element_by_xpath('//*[@id="btn-primary"]')
 
 email.send_keys(config('EMAIL'))
 password.send_keys(config('PASSWORD'))
+sign_in.click()
 
-sleep(5)
+sleep(10)
 
 browser.quit()
