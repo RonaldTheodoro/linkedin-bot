@@ -3,20 +3,37 @@ from selenium import webdriver
 from decouple import config
 
 
-browser = webdriver.Chrome(executable_path='drivers/chromedriver')
+def login_linkedin():
+    # User chrome driver
+    browser = webdriver.Chrome(executable_path='drivers/chromedriver')
 
-url = 'https://www.linkedin.com/uas/login?goback=&trk=hb_signin'
+    # Linkedin's url
+    url = 'https://www.linkedin.com/uas/login?goback=&trk=hb_signin'
 
-browser.get(url)
+    # Get html
+    browser.get(url)
 
-email = browser.find_element_by_xpath('//*[@id="session_key-login"]')
-password = browser.find_element_by_xpath('//*[@id="session_password-login"]')
-sign_in = browser.find_element_by_xpath('//*[@id="btn-primary"]')
+    # Find email input
+    email = browser.find_element_by_xpath('//*[@id="session_key-login"]')
+    # Find password input
+    password = browser.find_element_by_xpath(
+        '//*[@id="session_password-login"]')
+    # Find login button
+    sign_in = browser.find_element_by_xpath('//*[@id="btn-primary"]')
 
-email.send_keys(config('EMAIL'))
-password.send_keys(config('PASSWORD'))
-sign_in.click()
+    # Send keys
+    email.send_keys(config('EMAIL'))
+    password.send_keys(config('PASSWORD'))
+    
+    # Login
+    sign_in.click()
 
-sleep(10)
+    sleep(10)
 
-browser.quit()
+    # Close browser
+    browser.quit()
+
+
+if __name__ == '__main__':
+    login_linkedin()
+    
